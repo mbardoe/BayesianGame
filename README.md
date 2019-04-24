@@ -1,96 +1,50 @@
-# CarDemo
-Processing sketches to simulate a robotic car.
+# BayesianGame
+Processing sketches to simulate creating maps from noisy information channels.
 
-## API for the Car object
+In this Processing sketch, we create a Field that has a number randomly 
+positioned boxes that may overlap. Then there is a Sensor object that 
+looks at random positions in the field and reports that it findings. The
+sensor is prone to error with the following issues:
 
-Car has the following methods that may be useful:
+| Error type | Error strength|
+|------------|---------------|
+|Error on positive sighting| 20% of the time falsely reports nothing|
+|Error on negative sighting| 10% of the time falsely reports something|
+|Error on coordinates| Coordinates are wrong in both the x and y directions by a random error with standard deviation 5|
 
-```Car(int x, int y, float theta)```
-
-This constructor method allows you to place a car on the canvas pointing in the direction of ```angle```. The directions work 
-with 0 as directly up and move in in a clockwise manner.
-
-```void setLeftSpeed(int s)``` 
-
-Set the speed of the left motor to an integer from 0 to 255. 
-
-```void setRightSpeed(int s)``` 
-
-Set the speed of the left motor to an integer from 0 to 255. 
-
-```void LEDSense()```
-
-Have the readings of the left and right sensors loaded into ```sensorValueRight``` and ```sensorValueLeft```.
-
-```void show()``` 
-
-Draw the car on the canvas.
-
-```void move()```
-
-Compute the new position of the car based on the motor settings.
-
-## DriveSystem
-
-DriveSystem is basically an abstract class that needs to be subclassed to create a strategy for how the car is to move. 
-This set up is to emulate an autonomous car.
-
-There is one main method, ```void drive()```. Below is a sample ```drive``` method. In this case we want to have the car move 
-forward and then turn to the right, and then repeat those actions.
+Using this information the challenge is to build an ```update``` function within the ```MyMap``` class. The function currently there is the one that 
+takes the information raw and sets the corresponding part of the map to the 
+information from the sensor. The code for that is given by:
 
 ```
-void drive() {
-    //override me.
-    if (noSense==0) {
-      if (approach==0) {
-        myCar.setLeftSpeed(30);
-        myCar.setRightSpeed(30);
-        approach=1;
-        setNoSense(40);        
-      } 
-      else if (approach==1) {
-        myCar.setLeftSpeed(5);
-        myCar.setRightSpeed(-5);
-        setNoSense(30);
-        approach=0;
-      }
-    }
-    noSense--;
+ void update(int myx, int myy, float value) {
+    
+    /* THIS IS WHERE YOU PUT CODE.
+    
+    update takes in an x coordinate,  a y coordinate, and a value that  
+     is either 0.0 or 1.0. Your job is to update the map array. The array 
+     contains a triple array of boxes that represent square 12x12 regions of 
+     the field. E.g. map[3][2][1] is the probability that there IS SOMETHING THERE 
+     (because the third coordinate is 1) in the region defined by x coordinates
+     between 36 and 48 (because the first coordinate is 3) and y coordinates 
+     between 24 and 36 (because the second coordinate is 2).
+     
+     */
+
+    int newX, newY;
+
+    newX=myx/gridsize;
+    newY=myy/gridsize;
+    // If value=0 then 1-0 is 1, and 100 percent. 
+    myMap[newX][newY][0]=(int)(1-value);
+    myMap[newX][newY][1]=(int)(value);
   }
-```
+  ```
+  After three minutes of this code your map may look something like this.
 
-```approach``` is a class variable that allows you to indicate which settings you would like to employ. 
+  [three minute raw](link here)
 
-```setNoSense``` is a way to create a delay before the drive function determines another action. Basically actions are only 
-taken when noSense is equal to 0.
+  The goal is to use Bayesian updating to create a more faithful representation. For instance, one code that implemented a bayesian approach
+  was able to get these results after 3 minutes.
 
-In general you should use this template for your drive 
-
-```
-class MyDrive extends DriveSystem{
-  
-  MyDrive(Car mCar) {
-    super(mCar);
-  }
-  
-  void drive() {
-    //override me.
-    if (noSense==0) {
-      if (approach==0) {
-        // Put some stuff here for what to do first.
-        
-        // setNoSense to make it so that state continues for some period of time
-        setNoSense(40);        
-      } 
-      else if (approach==1) {
-        // Put some stuff here for what to do at another time indicated by approach 0.
-        
-        // setNoSense to make it so that state continues for some period of time
-        setNoSense(30);
-        
-      }
-    }
-    noSense--;
-  }
-}
-```
+  [three minute bayes](link here)
