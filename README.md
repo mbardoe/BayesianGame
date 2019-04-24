@@ -42,7 +42,7 @@ information from the sensor. The code for that is given by:
   ```
   After three minutes of this code your map may look something like this.
 
-  [three minute raw](link here)
+  ![three minute raw](https://github.com/Choate-Robotics/BayesianGame/blob/master/threeminuteraw.jpeg)
 
   The goal is to use Bayesian updating to create a more faithful representation. For instance, one code that implemented a bayesian approach
   was able to get these results after 3 minutes.
