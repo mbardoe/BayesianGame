@@ -15,15 +15,15 @@ abstract class Map {
     myMap=new float[myWidth][myHeight][2];
     for (int i=0; i<myWidth; i++) {
       for (int j=0; j<myHeight; j++) {
-        myMap[i][j][0]=.8;
-        myMap[i][j][1]=.2;
+        myMap[i][j][0]=.95;
+        myMap[i][j][1]=.05;
       }
     }
   }
   void show() {
     for (int i=0; i<myWidth; i++) {
       for (int j=0; j<myHeight; j++) {
-        fill(0, 0, 255, (int)(255*myMap[i][j][1]));
+        fill(0, 0, 255, (int)(255+50.2*log(myMap[i][j][1])));
         rectMode(CORNER);
         rect(i*gridsize+offx, j*gridsize+offy, gridsize, gridsize);
       }

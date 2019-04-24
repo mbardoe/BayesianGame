@@ -38,8 +38,8 @@ class MyMap extends Map {
     if (value>.5) {
       //I think that there is something
       //println("I think that there is something");
-      newEmpty=myMap[newX][newY][0]*.2;
-      newThere=myMap[newX][newY][1]*.8;
+      newEmpty=myMap[newX][newY][0]*.23;
+      newThere=myMap[newX][newY][1]*.77;
       myMap[newX][newY][0]=newEmpty/(newEmpty+newThere);
       myMap[newX][newY][1]=newThere/(newEmpty+newThere);
       ;
@@ -47,10 +47,10 @@ class MyMap extends Map {
     {
       //I think that there is nothing there
       //println("I think that there is nothing there");
-      newEmpty=myMap[newX][newY][0]*.9;
-      newThere=myMap[newX][newY][1]*.1;
-      myMap[newX][newY][0]=newEmpty/(newEmpty+newThere);
-      myMap[newX][newY][1]=newThere/(newEmpty+newThere);
+      newEmpty=myMap[newX][newY][0]*.87;
+      newThere=myMap[newX][newY][1]*.13;
+      myMap[newX][newY][0]=max(min(newEmpty/(newEmpty+newThere), 0.999),0.001);
+      myMap[newX][newY][1]=max(min(newThere/(newEmpty+newThere), 0.999),0.001);
     }
   }
 }
