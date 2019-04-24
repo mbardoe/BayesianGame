@@ -1,5 +1,5 @@
 class Sensor {
-  float objectErrorRate = 0.2;
+  float objectErrorRate = 0.25;
   float emptyErrorRate = 0.1;
   float avgPositionError=4.0;
   int myWidth, myHeight;
