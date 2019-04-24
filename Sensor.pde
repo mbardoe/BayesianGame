@@ -1,7 +1,7 @@
 class Sensor {
-  float objectErrorRate = 0.25;
+  float objectErrorRate = 0.2;
   float emptyErrorRate = 0.1;
-  float avgPositionError=4.0;
+  float avgPositionError=5.0;
   int myWidth, myHeight;
   Map myMapM;
 
