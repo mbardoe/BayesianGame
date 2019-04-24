@@ -8,8 +8,8 @@ abstract class Map {
   Map(int offsetx, int offsety, int areawidth, int areaheight) {
     offx=offsetx;
     offy=offsety;
-    myWidth=areawidth/gridsize;
-    myHeight=areaheight/gridsize;
+    myWidth=areawidth/gridsize+1;
+    myHeight=areaheight/gridsize+1;
     print(myWidth);
     print(myHeight);
     myMap=new float[myWidth][myHeight][2];

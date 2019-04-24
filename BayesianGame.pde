@@ -29,5 +29,6 @@ void draw(){
   field.show();
   mymap.show();
   sensor.sense();
+  //delay(500);
 
 }
