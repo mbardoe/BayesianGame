@@ -38,8 +38,8 @@ class MyMap extends Map {
     if (value>.5) {
       //I think that there is something
       //println("I think that there is something");
-      newEmpty=myMap[newX][newY][0]*.25;
-      newThere=myMap[newX][newY][1]*.75;
+      newEmpty=myMap[newX][newY][0]*.2;
+      newThere=myMap[newX][newY][1]*.8;
       myMap[newX][newY][0]=newEmpty/(newEmpty+newThere);
       myMap[newX][newY][1]=newThere/(newEmpty+newThere);
       ;
