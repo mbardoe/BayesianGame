@@ -3,13 +3,13 @@ class Sensor {
   float emptyErrorRate = 0.1;
   float avgPositionError=5.0;
   int myWidth, myHeight;
-  Map myMapM;
+  Map[] myMapMs;
 
-  Sensor(int myW, int myH, Map map) {
+  Sensor(int myW, int myH, Map[] maps) {
 
     myWidth=myW;
     myHeight=myH;
-    myMapM=map;
+    myMapMs=maps;
   }
 
   void sense() {
@@ -74,6 +74,9 @@ class Sensor {
     //  fill(255, 0, 0);
     //}
     //ellipse(newX, newY, 10, 10);
-    myMapM.update(newX, newY, returnValue);
+    for (Map m:myMapMs) {
+
+      m.update(newX, newY, returnValue);
+    }
   }
 }

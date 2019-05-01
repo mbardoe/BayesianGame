@@ -12,11 +12,13 @@ class MyMap extends Map {
 
 
   void update(int myx, int myy, float value) {
-    /* update takes in an x coordinate,  a y coordinate, and a value that  
+    /* THIS IS WHERE YOU PUT CODE.
+    
+    update takes in an x coordinate,  a y coordinate, and a value that  
      is either 0.0 or 1.0. Your job is to update the map array. The array 
      contains a triple array of boxes that represent square 12x12 regions of 
-     the field. E.g. map[3][2][1] is the probability that there IS NOT (because 
-     the third coordinate is 1) something in the region defined by x coordinates
+     the field. E.g. map[3][2][1] is the probability that there IS SOMETHING THERE 
+     (because the third coordinate is 1) in the region defined by x coordinates
      between 36 and 48 (because the first coordinate is 3) and y coordinates 
      between 24 and 36 (because the second coordinate is 2).
      
@@ -26,31 +28,8 @@ class MyMap extends Map {
 
     newX=myx/gridsize;
     newY=myy/gridsize;
-    //print(myWidth);
-    //println(myHeight);
-    //print("myX:");
-    //println(myx);
-    //print("newX:");
-    //println(newX);
-    //print("newY:");
-    //println(newY);
-    float newThere, newEmpty;
-    if (value>.5) {
-      //I think that there is something
-      //println("I think that there is something");
-      newEmpty=myMap[newX][newY][0]*.2;
-      newThere=myMap[newX][newY][1]*.8;
-      myMap[newX][newY][0]=newEmpty/(newEmpty+newThere);
-      myMap[newX][newY][1]=newThere/(newEmpty+newThere);
-      ;
-    } else
-    {
-      //I think that there is nothing there
-      //println("I think that there is nothing there");
-      newEmpty=myMap[newX][newY][0]*.9;
-      newThere=myMap[newX][newY][1]*.1;
-      myMap[newX][newY][0]=newEmpty/(newEmpty+newThere);
-      myMap[newX][newY][1]=newThere/(newEmpty+newThere);
-    }
+    // If value=0 then 1-0 is 1, and 100 percent. 
+    myMap[newX][newY][0]=(int)(1-value);
+    myMap[newX][newY][1]=(int)(value);
   }
 }
